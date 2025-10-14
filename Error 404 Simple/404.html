@@ -3,44 +3,44 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>404 - Halaman Tidak Ditemukan</title>
-  <meta name="description" content="404 Halaman tidak ditemukan — mari kembali ke beranda" />
-  <link rel="stylesheet" href="404.css">
+  <title>404 - Halaman Tidak Ditemukan | NightZone</title>
+  <meta name="description" content="Halaman tidak ditemukan — mari kembali ke beranda" />
+  <link rel="stylesheet" href="404.css" />
 </head>
 <body>
-  <main class="container" role="main" aria-labelledby="title">
-    <section class="left" aria-labelledby="title">
-      <div class="eyebrow">Kesalahan 404</div>
-      <h1 id="title">Halaman Tidak Ditemukan</h1>
-      <p class="lead">
-        Maaf - halaman yang kamu cari tidak tersedia atau mungkin sudah dipindahkan. Coba kembali ke beranda atau gunakan fitur pencarian.
+  <!-- 🔹 Canvas Partikel -->
+  <canvas id="particles"></canvas>
+
+  <!-- 🔹 NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">Night<span>Zone</span></div>
+  </nav>
+
+  <!-- 🔹 ISI UTAMA -->
+  <main class="error-wrapper">
+    <div class="error-box">
+      <header class="error-header">
+        <h1 class="glow-text glitch" data-text="Error 404">Error <span>404</span></h1>
+        <p>Halaman Tidak Ditemukan</p>
+      </header>
+
+      <p class="error-message">
+        Maaf - halaman yang kamu cari tidak tersedia atau mungkin sudah dipindahkan.  
+        Coba kembali ke beranda atau gunakan fitur pencarian di bawah.
       </p>
 
-      <div class="actions" aria-hidden="false">
-        <a class="btn btn-primary" href="/Portofolio_Simple/index.html" title="Kembali ke Beranda" role="button" id="homeBtn">
-          ⟲ Kembali ke Beranda
-        </a>
-        <a class="btn btn-ghost" href="javascript:history.back()" title="Kembali">
-          ← Kembali
-        </a>
+      <div class="button-group">
+        <a href="index.html" class="btn primary">⟲ Kembali ke Beranda</a>
+        <a href="javascript:history.back()" class="btn ghost">← Kembali</a>
       </div>
 
-      <form class="search" role="search" onsubmit="event.preventDefault(); doSearch();">
-        <input id="q" name="q" type="search" placeholder="Cari di situs ini..." aria-label="Cari di situs ini" />
-        <button class="btn btn-primary" type="submit" aria-label="Cari">🔎</button>
+      <form class="search" onsubmit="event.preventDefault(); alert('Fitur pencarian belum aktif!')">
+        <input type="search" placeholder="Cari di situs ini..." />
+        <button type="submit">🔍</button>
       </form>
 
-      <footer class="meta" aria-hidden="true">
-        <span>Jika masalah berlanjut, hubungi <a href="mailto:funxyle@gmail.com" style="color:inherit;text-decoration:underline;">funxyle@gmail.com</a></span>
-        <span>•</span>
-        <span>Timestamp: <time id="ts"></time></span>
-      </footer>
-    </section>
-
-    <aside class="visual" aria-hidden="true">
-      <div class="scene">
-        <!-- Illustrative SVG (robot + folder) -->
-        <svg class="robot" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi 404">
+      <div class="robot-container">
+        <svg class="robot" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="g1" x1="0" x2="1">
               <stop offset="0" stop-color="#60a5fa"/>
@@ -50,9 +50,7 @@
               <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#0b1220" flood-opacity="0.6"/>
             </filter>
           </defs>
-
           <ellipse cx="110" cy="142" rx="62" ry="10" fill="rgba(2,6,23,0.6)"/>
-
           <g transform="translate(40,16)" filter="url(#shadow)">
             <rect x="20" y="24" width="120" height="90" rx="14" fill="url(#g1)"/>
             <rect x="28" y="32" width="104" height="74" rx="10" fill="#07122a" opacity="0.12"/>
@@ -64,18 +62,64 @@
             <rect x="92" y="6" width="6" height="18" rx="3" fill="#ffd47a"/>
             <circle cx="95" cy="6" r="6" fill="#ffd47a"/>
           </g>
-
-          <text x="40" y="28" fill="#cfe8ff" font-family="Inter, Roboto, Arial" font-size="20" font-weight="700">404</text>
-          <text x="40" y="48" fill="#94a3b8" font-family="Inter, Roboto, Arial" font-size="11">Halaman tidak ditemukan</text>
         </svg>
-
-        <div class="code-snippet" aria-hidden="true">
-          /pages/unknown → 404
-        </div>
+        <div class="code-snippet">/pages/unknown → 404</div>
       </div>
-    </aside>
+
+      <footer>
+        <p>Hubungi: <a href="mailto:funxyle@gmail.com">funxyle@gmail.com</a> • 
+        <time id="ts"></time></p>
+      </footer>
+    </div>
   </main>
 
-  <script src="404.js"></script>
+  <script>
+    document.getElementById("ts").textContent = new Date().toLocaleString("id-ID");
+
+    // 🌌 Partikel neon beterbangan
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    const colors = ["#00ffff", "#ff00ff", "#00ff00", "#ffae00", "#00aaff"];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        speedX: (Math.random() - 0.5) * 0.7,
+        speedY: (Math.random() - 0.5) * 0.7,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
 </body>
 </html>
